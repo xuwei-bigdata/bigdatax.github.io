@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="数据分析get 一. 操作数据库1.1 插入数据1234567891011插入数据：import pandas as pdfrom sqlalchemy import create_enginedf &#x3D; pd.read_csv(&quot;studyRes.csv&quot;)# 数据库连接参数engine &#x3D; create_engine(&quot;postgresql:&#x2F;&#x2F;postgres:123456@127.0.0.1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据分析">
+<meta property="og:url" content="https://xuwei_big_datax.gitee.io/2023/04/16/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="请叫我泡面哥">
+<meta property="og:description" content="数据分析get 一. 操作数据库1.1 插入数据1234567891011插入数据：import pandas as pdfrom sqlalchemy import create_enginedf &#x3D; pd.read_csv(&quot;studyRes.csv&quot;)# 数据库连接参数engine &#x3D; create_engine(&quot;postgresql:&#x2F;&#x2F;postgres:123456@127.0.0.1">
+<meta property="article:published_time" content="2023-04-16T15:28:13.889Z">
+<meta property="article:modified_time" content="2020-10-19T04:52:03.412Z">
+<meta property="article:author" content="xuwei">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://xuwei_big_datax.gitee.io/2023/04/16/数据分析/"/>
+
+
+
+
+
+  <title>数据分析 | 请叫我泡面哥</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?038174ffd85c4f6abe9209c8ee8e85bb";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">请叫我泡面哥</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">身体和灵魂总要有一个在路上</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-个人介绍">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            个人介绍
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-给我留言">
+          <a href="/guestbook/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-comment"></i> <br />
+            
+            给我留言
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xuwei_big_datax.gitee.io/2023/04/16/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xuwei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="请叫我泡面哥">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-04-16T23:28:13+08:00">
+                2023-04-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2023/04/16/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2023/04/16/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  14
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h1><p><a href="/download/2.rar">get</a></p>
+<h1 id="一-操作数据库"><a href="#一-操作数据库" class="headerlink" title="一. 操作数据库"></a>一. 操作数据库</h1><h3 id="1-1-插入数据"><a href="#1-1-插入数据" class="headerlink" title="1.1 插入数据"></a>1.1 插入数据</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">插入数据：</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> create_engine</span><br><span class="line"></span><br><span class="line">df = pd.read_csv(<span class="string">"studyRes.csv"</span>)</span><br><span class="line"><span class="comment"># 数据库连接参数</span></span><br><span class="line">engine = create_engine(<span class="string">"postgresql://postgres:123456@127.0.0.1:5432/postgres"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(df)):</span><br><span class="line">    export_sql = <span class="string">'insert into '</span> + <span class="string">"public.demo2"</span> + <span class="string">'('</span> + <span class="string">','</span>.join(headers) + <span class="string">') values('</span> + <span class="string">','</span>.join([<span class="string">"'"</span>+str(i)+<span class="string">"'"</span> <span class="keyword">for</span> i <span class="keyword">in</span> df.iloc[i].values]) + <span class="string">')'</span></span><br><span class="line">    engine.execute(export_sql)</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> mysql.connector</span><br><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line">HOST = <span class="string">'rm-bp19or199ue896jkm.mysql.rds.aliyuncs.com'</span></span><br><span class="line"><span class="comment"># HOST = 'basedata-test-in.mysql.rds.aliyuncs.com'</span></span><br><span class="line">DB = <span class="string">'ih'</span></span><br><span class="line">PASSWORD = <span class="string">'M0N0F5wzWhKhqCtl'</span></span><br><span class="line">USER = <span class="string">'sulei'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">selectByMcp</span><span class="params">(sql)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    通过mysql-connector-python 查询</span></span><br><span class="line"><span class="string">    用原始C语言扩展查询 性能会好很多</span></span><br><span class="line"><span class="string">    :param sql:</span></span><br><span class="line"><span class="string">    :return: 结果集</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    cnx = mysql.connector.connect(user=USER, password=PASSWORD,</span><br><span class="line">                                  host=HOST,</span><br><span class="line">                                  database=DB</span><br><span class="line">                                  )</span><br><span class="line"></span><br><span class="line">    cursor = cnx.cursor()</span><br><span class="line">    cursor.execute(sql)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> cursor.fetchall()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-2-查询数据"><a href="#1-2-查询数据" class="headerlink" title="1.2 查询数据"></a>1.2 查询数据</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">DRIVE = <span class="string">"mysql+pymysql"</span></span><br><span class="line">USER = <span class="string">"root"</span></span><br><span class="line">PASSWORD = <span class="string">"123456"</span></span><br><span class="line">HOST = <span class="string">"192.168.0.109"</span></span><br><span class="line">PORT = <span class="string">"3306"</span></span><br><span class="line">DATABASE = <span class="string">"guli_edu"</span></span><br><span class="line"></span><br><span class="line">engine=create_engine(<span class="string">f"<span class="subst">&#123;DRIVE&#125;</span>://<span class="subst">&#123;USER&#125;</span>:<span class="subst">&#123;PASSWORD&#125;</span>@<span class="subst">&#123;HOST&#125;</span>:<span class="subst">&#123;PORT&#125;</span>/<span class="subst">&#123;DATABASE&#125;</span>"</span>)</span><br><span class="line">connect = engine.connect()</span><br><span class="line">sql = <span class="string">"select * from edu_teacher;"</span></span><br><span class="line">result = connect.execute(sql)</span><br><span class="line">df = pd.read_sql(sql, connect)</span><br><span class="line">connect.close()</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-3-python操作需要SSH连接的数据库"><a href="#1-3-python操作需要SSH连接的数据库" class="headerlink" title="1.3 python操作需要SSH连接的数据库"></a>1.3 python操作需要SSH连接的数据库</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>  pymysql</span><br><span class="line"><span class="keyword">from</span> sshtunnel <span class="keyword">import</span> SSHTunnelForwarder</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> SSHTunnelForwarder(</span><br><span class="line">    (<span class="string">"47.114.164.183"</span>, <span class="number">22</span>), <span class="comment">#ssh IP和port</span></span><br><span class="line">    ssh_password = <span class="string">"uR0Pgp&amp;f"</span>,<span class="comment">#ssh 密码</span></span><br><span class="line">    ssh_username = <span class="string">"xuwei"</span>,<span class="comment">#ssh账号</span></span><br><span class="line">    remote_bind_address = (<span class="string">"rm-bp19or199ue896jkm.mysql.rds.aliyuncs.com"</span>, <span class="number">3306</span>)</span><br><span class="line">) <span class="keyword">as</span> server:</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#打印本地端口，已检查是否配置正确</span></span><br><span class="line">    print(server.local_bind_host)</span><br><span class="line"></span><br><span class="line">    goDB = pymysql.connect(host = <span class="string">"127.0.0.1"</span>, <span class="comment">#固定写法</span></span><br><span class="line">                   port = server.local_bind_port,</span><br><span class="line">                   user = <span class="string">"xuwei"</span>, <span class="comment">#数据库账号</span></span><br><span class="line">                   passwd = <span class="string">"o0r$&amp;OYLzo38df^X"</span>,<span class="comment">#数据库密码</span></span><br><span class="line">                    db = <span class="string">"ih"</span>)<span class="comment"># 可以限定，只访问特定的数据库,否则需要在mysql的查询或者操作语句中，指定好表名</span></span><br><span class="line"></span><br><span class="line">    sql = <span class="string">"select * from setting limit 10"</span> <span class="comment">#限制每次随机查询10条数据</span></span><br><span class="line">    cur = goDB.cursor()</span><br><span class="line">    cur.execute(sql)</span><br><span class="line">    data = cur.fetchall()</span><br><span class="line">    print(data)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> data:</span><br><span class="line">        good_no = row[<span class="number">0</span>]</span><br><span class="line">        print(good_no)</span><br><span class="line">        </span><br><span class="line">    <span class="comment">#关闭连接</span></span><br><span class="line">    goDB.close()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="二-常用分析包"><a href="#二-常用分析包" class="headerlink" title="二. 常用分析包"></a>二. 常用分析包</h1><h3 id="2-1-pandas"><a href="#2-1-pandas" class="headerlink" title="2.1 pandas"></a>2.1 pandas</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>reset_index</td>
+<td>重置索引</td>
+<td>df.drop(index=drop_index).reset_index(drop=True)</td>
+</tr>
+<tr>
+<td>isin</td>
+<td>判断值是否在该列表中</td>
+<td>df.id.isin([1,4])</td>
+</tr>
+<tr>
+<td>sort_values</td>
+<td>按照某一列排序</td>
+<td>df.sort_values([‘name’,’id’])</td>
+</tr>
+<tr>
+<td>drop_duplicates</td>
+<td>去重</td>
+<td># keep = False 有重复就全部去除 <br>df.drop_duplicates(subset = [‘id’],keep = ‘last’,inplace = True ,ignore_index=True)</td>
+</tr>
+<tr>
+<td>sort_values</td>
+<td>排序</td>
+<td>df2.sort_values(by = [‘id’],ignore_index=True)</td>
+</tr>
+<tr>
+<td>merge</td>
+<td>合并</td>
+<td>pd.merge(df1,df2,how = ‘left’,left_on=[‘id’],right_on=[‘id’])</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h5 id="2-1-1-构建dataframe"><a href="#2-1-1-构建dataframe" class="headerlink" title="2.1.1 构建dataframe"></a>2.1.1 构建dataframe</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">test_dict = &#123;<span class="string">'id'</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],<span class="string">'name'</span>:[<span class="string">'Alice'</span>,<span class="string">'Bob'</span>,<span class="string">'Cindy'</span>,<span class="string">'Eric'</span>,<span class="string">'Helen'</span>,<span class="string">'Grace '</span>],<span class="string">'math'</span>:[<span class="number">90</span>,<span class="number">89</span>,<span class="number">99</span>,<span class="number">78</span>,<span class="number">97</span>,<span class="number">93</span>],<span class="string">'english'</span>:[<span class="number">89</span>,<span class="number">94</span>,<span class="number">80</span>,<span class="number">94</span>,<span class="number">94</span>,<span class="number">90</span>]&#125;</span><br><span class="line"><span class="comment">#[1].直接写入参数test_dict</span></span><br><span class="line">test_dict_df = pd.DataFrame(test_dict)</span><br><span class="line"><span class="comment">#[2].字典型赋值</span></span><br><span class="line">test_dict_df = pd.DataFrame(data=test_dict)</span><br><span class="line"><span class="comment"># 只选择某几列值作为数据</span></span><br><span class="line">test_dict_df = pd.DataFrame(data=test_dict,columns=[<span class="string">'id'</span>,<span class="string">'name'</span>])</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-1-2-修改列名"><a href="#2-1-2-修改列名" class="headerlink" title="2.1.2 修改列名"></a>2.1.2 修改列名</h5><blockquote>
+<ol>
+<li>覆盖columns，2. rename</li>
+</ol>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.覆盖</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">test_dict = &#123;<span class="string">'id'</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],<span class="string">'name'</span>:[<span class="string">'Alice'</span>,<span class="string">'Bob'</span>,<span class="string">'Cindy'</span>,<span class="string">'Eric'</span>,<span class="string">'Helen'</span>,<span class="string">'Grace '</span>],<span class="string">'math'</span>:[<span class="number">90</span>,<span class="number">89</span>,<span class="number">99</span>,<span class="number">78</span>,<span class="number">97</span>,<span class="number">93</span>],<span class="string">'english'</span>:[<span class="number">89</span>,<span class="number">94</span>,<span class="number">80</span>,<span class="number">94</span>,<span class="number">94</span>,<span class="number">90</span>]&#125;</span><br><span class="line">test_dict_df = pd.DataFrame(data=test_dict,columns=[<span class="string">'id'</span>,<span class="string">'name'</span>])</span><br><span class="line">test_dict_df.columns=[<span class="string">'a'</span>,<span class="string">'B'</span>]</span><br><span class="line"><span class="comment"># 2.rename</span></span><br><span class="line">test_dict_df.rename(columns=&#123;<span class="string">'a'</span>:<span class="string">'id'</span>,<span class="string">'B'</span>:<span class="string">'name'</span>&#125;,inplace=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="2-2-numpy"><a href="#2-2-numpy" class="headerlink" title="2.2 numpy"></a>2.2 numpy</h3><h3 id="2-3-matplotlib"><a href="#2-3-matplotlib" class="headerlink" title="2.3 matplotlib"></a>2.3 matplotlib</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"> </span><br><span class="line">x = np.linspace(<span class="number">-1</span>,<span class="number">1</span>,<span class="number">50</span>)<span class="comment">#从(-1,1)均匀取50个点</span></span><br><span class="line">y = <span class="number">2</span> * x</span><br><span class="line"> </span><br><span class="line">plt.plot(x,y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding:utf-8</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.ticker <span class="keyword">as</span> ticker</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解决中文乱码的问题</span></span><br><span class="line">plt.rcParams[<span class="string">'font.sans-serif'</span>] = [<span class="string">'SimHei'</span>]  <span class="comment"># 用来正常显示中文标签</span></span><br><span class="line">plt.rcParams[<span class="string">'axes.unicode_minus'</span>] = <span class="literal">False</span>  <span class="comment"># 用来正常显示负号</span></span><br><span class="line"></span><br><span class="line">data = pd.read_csv(<span class="string">"../csvFile/全部订单-小时分1440.csv"</span>)</span><br><span class="line"></span><br><span class="line">tick_xSpacing = <span class="number">200</span></span><br><span class="line">tick_ySpacing = <span class="number">500</span></span><br><span class="line">fig, ax = plt.subplots(<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">ax.plot(data.hhmi, data.num, <span class="string">"ob"</span>)</span><br><span class="line"><span class="comment"># 修改横纵坐标的间隔</span></span><br><span class="line">ax.xaxis.set_major_locator(ticker.MultipleLocator(tick_xSpacing))</span><br><span class="line">ax.yaxis.set_major_locator(ticker.MultipleLocator(tick_ySpacing))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置横纵坐标的名称</span></span><br><span class="line">plt.xlabel(<span class="string">"时间"</span>)</span><br><span class="line">plt.ylabel(<span class="string">"订单数"</span>)</span><br><span class="line">plt.title(<span class="string">"x-y"</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h1 id="十-可复用的方法"><a href="#十-可复用的方法" class="headerlink" title="十. 可复用的方法"></a>十. 可复用的方法</h1><h3 id="10-1-将结果序列化到磁盘，提高开发速率"><a href="#10-1-将结果序列化到磁盘，提高开发速率" class="headerlink" title="10.1 将结果序列化到磁盘，提高开发速率"></a>10.1 将结果序列化到磁盘，提高开发速率</h3><blockquote>
+<p>serial</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> wraps</span><br><span class="line"><span class="keyword">import</span> inspect</span><br><span class="line"></span><br><span class="line"><span class="comment"># SERIAL_FILE_DIR = os.path.dirname(os.path.realpath(__file__)) + '/serial'</span></span><br><span class="line"></span><br><span class="line">SERIAL_FILE_DIR = os.getcwd() + <span class="string">'/serial/'</span></span><br><span class="line">DUMP_FILE_EXT = <span class="string">'.dump'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(SERIAL_FILE_DIR):</span><br><span class="line">    os.makedirs(SERIAL_FILE_DIR)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">import</span> <span class="title">logging</span></span></span><br><span class="line"><span class="function"><span class="title">import</span> <span class="title">os</span></span></span><br><span class="line"><span class="function"><span class="title">import</span> <span class="title">pickle</span></span></span><br><span class="line"><span class="function"><span class="title">from</span> <span class="title">functools</span> <span class="title">import</span> <span class="title">wraps</span></span></span><br><span class="line"><span class="function"><span class="title">import</span> <span class="title">inspect</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"># SERIAL_FILE_DIR = os.path.dirname(os.path.realpath(__file__)) + '/serial'</span><br><span class="line"></span><br><span class="line">SERIAL_FILE_DIR = os.getcwd() + <span class="string">'/serial/'</span></span><br><span class="line">DUMP_FILE_EXT = <span class="string">'.dump'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(SERIAL_FILE_DIR):</span><br><span class="line">    os.makedirs(SERIAL_FILE_DIR)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">serial_result</span><span class="params">(func)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    将函数返回值序列化到磁盘。相同参数直接读取。</span></span><br><span class="line"><span class="string">    :param func:</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"><span class="meta">    @wraps(func)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line"></span><br><span class="line">        func_filename = inspect.getmodule(func).__file__[</span><br><span class="line">                        inspect.getmodule(func).__file__.rfind(<span class="string">'/'</span>) <span class="keyword">if</span> <span class="string">'/'</span> <span class="keyword">in</span> inspect.getmodule(func).__file__ <span class="keyword">else</span> inspect.getmodule(func).__file__.rfind(<span class="string">'\\'</span>) + <span class="number">1</span>:inspect.getmodule(func).__file__.rfind(<span class="string">'.py'</span>)]</span><br><span class="line">        func_args = func.__name__ + (<span class="string">'.'</span> + str(args) <span class="keyword">if</span> args <span class="keyword">else</span> <span class="string">''</span>) + (<span class="string">'.'</span> + str(kwargs) <span class="keyword">if</span> kwargs <span class="keyword">else</span> <span class="string">''</span>)</span><br><span class="line">        dump_fname = func_filename + DUMP_FILE_EXT</span><br><span class="line">        serial_file = SERIAL_FILE_DIR + dump_fname</span><br><span class="line">        <span class="keyword">if</span> os.path.exists(serial_file):</span><br><span class="line">            logging.debug(<span class="string">'[serial_result] is loading results of function %s '</span> % (func_args,))</span><br><span class="line">            print(<span class="string">'[serial_result] is loading results of function %s '</span> % (func_args,))</span><br><span class="line">            <span class="keyword">with</span> open(serial_file, <span class="string">'rb'</span>) <span class="keyword">as</span> fin:</span><br><span class="line">                <span class="keyword">return</span> pickle.load(fin)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            logging.debug(<span class="string">'[serial_result] is calling function %s '</span> % (func_args,))</span><br><span class="line">            print(<span class="string">'[serial_result] is calling function %s '</span> % (func_args,))</span><br><span class="line">            result = func(*args, **kwargs)</span><br><span class="line">            logging.debug(<span class="string">'[serial_result] is dumping results of function %s '</span> % (func_args,))</span><br><span class="line">            print(<span class="string">'[serial_result] is dumping results of function %s '</span> % (func_args,))</span><br><span class="line">            <span class="keyword">with</span> open(serial_file, <span class="string">'wb'</span>) <span class="keyword">as</span> fout:</span><br><span class="line">                pickle.dump(result, fout)</span><br><span class="line">            <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line">_result(func):</span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    将函数返回值序列化到磁盘。相同参数直接读取。</span></span><br><span class="line"><span class="string">    :param func:</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"><span class="meta">    @wraps(func)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line"></span><br><span class="line">        func_filename = inspect.getmodule(func).__file__[</span><br><span class="line">                        inspect.getmodule(func).__file__.rfind(<span class="string">'/'</span>) <span class="keyword">if</span> <span class="string">'/'</span> <span class="keyword">in</span> inspect.getmodule(func).__file__ <span class="keyword">else</span> inspect.getmodule(func).__file__.rfind(<span class="string">'\\'</span>) + <span class="number">1</span>:inspect.getmodule(func).__file__.rfind(<span class="string">'.py'</span>)]</span><br><span class="line">        func_args = func.__name__ + (<span class="string">'.'</span> + str(args) <span class="keyword">if</span> args <span class="keyword">else</span> <span class="string">''</span>) + (<span class="string">'.'</span> + str(kwargs) <span class="keyword">if</span> kwargs <span class="keyword">else</span> <span class="string">''</span>)</span><br><span class="line">        dump_fname = func_filename + DUMP_FILE_EXT</span><br><span class="line">        serial_file = SERIAL_FILE_DIR + dump_fname</span><br><span class="line">        <span class="keyword">if</span> os.path.exists(serial_file):</span><br><span class="line">            logging.debug(<span class="string">'[serial_result] is loading results of function %s '</span> % (func_args,))</span><br><span class="line">            print(<span class="string">'[serial_result] is loading results of function %s '</span> % (func_args,))</span><br><span class="line">            <span class="keyword">with</span> open(serial_file, <span class="string">'rb'</span>) <span class="keyword">as</span> fin:</span><br><span class="line">                <span class="keyword">return</span> pickle.load(fin)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            logging.debug(<span class="string">'[serial_result] is calling function %s '</span> % (func_args,))</span><br><span class="line">            print(<span class="string">'[serial_result] is calling function %s '</span> % (func_args,))</span><br><span class="line">            result = func(*args, **kwargs)</span><br><span class="line">            logging.debug(<span class="string">'[serial_result] is dumping results of function %s '</span> % (func_args,))</span><br><span class="line">            print(<span class="string">'[serial_result] is dumping results of function %s '</span> % (func_args,))</span><br><span class="line">            <span class="keyword">with</span> open(serial_file, <span class="string">'wb'</span>) <span class="keyword">as</span> fout:</span><br><span class="line">                pickle.dump(result, fout)</span><br><span class="line">            <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>db_test</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> create_engine</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> serial <span class="keyword">import</span> serial_result</span><br><span class="line"></span><br><span class="line">HOST = <span class="string">'localhost'</span></span><br><span class="line">DATABASE = <span class="string">'demo'</span></span><br><span class="line">PASSWORD = <span class="string">'123456'</span></span><br><span class="line">USER = <span class="string">'root'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@serial_result</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_data_by_sql</span><span class="params">(sql)</span>:</span></span><br><span class="line">    DRIVE = <span class="string">"mysql+pymysql"</span></span><br><span class="line">    PORT = <span class="number">3306</span></span><br><span class="line"></span><br><span class="line">    engine = create_engine(<span class="string">f"<span class="subst">&#123;DRIVE&#125;</span>://<span class="subst">&#123;USER&#125;</span>:<span class="subst">&#123;PASSWORD&#125;</span>@<span class="subst">&#123;HOST&#125;</span>:<span class="subst">&#123;PORT&#125;</span>/<span class="subst">&#123;DATABASE&#125;</span>"</span>)</span><br><span class="line">    connect = engine.connect()</span><br><span class="line">    result = connect.execute(sql)</span><br><span class="line">    df = pd.read_sql(sql, connect)</span><br><span class="line">    connect.close()</span><br><span class="line">    <span class="keyword">return</span> df</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    sql = <span class="string">'''select * from test'''</span></span><br><span class="line">    res = get_data_by_sql(sql)</span><br><span class="line">    print(res)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="10-2-按曲线分配订单并写入sql文件"><a href="#10-2-按曲线分配订单并写入sql文件" class="headerlink" title="10.2 按曲线分配订单并写入sql文件"></a>10.2 按曲线分配订单并写入sql文件</h3><p><a href="D:\jupyter_folder\first">config.yaml</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> calendar</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime, timedelta</span><br><span class="line"><span class="keyword">import</span> yaml</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">random_split</span><span class="params">(total, num)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    将total随机分配到num。例如：将100个血糖，随机分配给50个用户，使用random_split(100, 50)分配</span></span><br><span class="line"><span class="string">    :param total:</span></span><br><span class="line"><span class="string">    :param num:</span></span><br><span class="line"><span class="string">    :return: 长度为num，总和为total的list</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">if</span> num &gt; total:</span><br><span class="line">        result = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(total):</span><br><span class="line">            result.append(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(num - total):</span><br><span class="line">            result.append(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    <span class="keyword">elif</span> num == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        dividers = sorted(random.sample(range(<span class="number">1</span>, total), num - <span class="number">1</span>))</span><br><span class="line">        <span class="keyword">return</span> [a - b <span class="keyword">for</span> a, b <span class="keyword">in</span> zip(dividers + [total], [<span class="number">0</span>] + dividers)]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">random_avg_split</span><span class="params">(total, num, rate=<span class="number">0.8</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    将total按照基本平均值随机分配到num</span></span><br><span class="line"><span class="string">    :param total:</span></span><br><span class="line"><span class="string">    :param num:</span></span><br><span class="line"><span class="string">    :param rate: 保底比例，0到1之间。1表示完全平均分配，0表示完全随机分配。</span></span><br><span class="line"><span class="string">    :return: 长度为num，总和为total的list</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    base = int(total / num * rate)  <span class="comment"># 80%分配到每个num中，保证大致平衡</span></span><br><span class="line">    random_result = random_split(total - base * num, num)</span><br><span class="line">    <span class="keyword">return</span> [base + random_result[i] <span class="keyword">for</span> i <span class="keyword">in</span> range(num)]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">f = open(<span class="string">'config.yaml'</span>,<span class="string">'r'</span>,encoding=<span class="string">'utf-8'</span>)</span><br><span class="line">config = f.read()</span><br><span class="line">data = yaml.load(config)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1天1440个分钟</span></span><br><span class="line">hour_minute = [i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1440</span>)]</span><br><span class="line"><span class="comment"># 1440分钟对应的概率</span></span><br><span class="line">hour_minute_probability = data[<span class="string">'probability'</span>]</span><br><span class="line">hour_minute_probability_table = [z <span class="keyword">for</span> x, y <span class="keyword">in</span> zip(hour_minute, hour_minute_probability) <span class="keyword">for</span> z <span class="keyword">in</span> [x] * int(y)]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_datetime</span><span class="params">(year, month, num)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    获取datetime</span></span><br><span class="line"><span class="string">    :param year: 年</span></span><br><span class="line"><span class="string">    :param month: 月</span></span><br><span class="line"><span class="string">    :param num: 数量</span></span><br><span class="line"><span class="string">    :return: 按照概率曲线产生的时间</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    result = []</span><br><span class="line"></span><br><span class="line">    month_days = calendar.monthrange(year, month)[<span class="number">1</span>]  <span class="comment"># 当前月有几天</span></span><br><span class="line">    num_each_day = random_avg_split(num, month_days, <span class="number">0.9</span>)  <span class="comment"># 计算每天分配多少数量</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> day, day_num <span class="keyword">in</span> zip(range(<span class="number">1</span>, month_days + <span class="number">1</span>), num_each_day):</span><br><span class="line">        this_day = datetime(year, month, day)  <span class="comment"># 当天00:00:00，作为基础数据</span></span><br><span class="line">        print(<span class="string">f'gen <span class="subst">&#123;this_day:%Y-%m-%d&#125;</span> for <span class="subst">&#123;day_num&#125;</span>'</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(day_num):  <span class="comment"># 按天生成具体数据</span></span><br><span class="line">            <span class="comment"># 随机从1440个minute按照概率曲线取出一个值，作为一个时间的minute</span></span><br><span class="line">            <span class="comment"># 下面两行是概率曲线的核心：</span></span><br><span class="line">            <span class="comment"># 1. 按照分钟概率曲线取具体的数据生成分钟</span></span><br><span class="line">            minute_add = random.choice(hour_minute_probability_table)</span><br><span class="line">            <span class="comment"># 2. 当天的00:00:00，加上分钟数，和随机的秒数，作为create_time</span></span><br><span class="line">            create_time = this_day + timedelta(minutes=minute_add, seconds=random.randint(<span class="number">0</span>, <span class="number">59</span>))</span><br><span class="line"></span><br><span class="line">            result.append(create_time)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># todo 把秒打乱，不要随机分</span></span><br><span class="line">        <span class="comment"># num_in_each_minute = &#123;&#125;  # 分配秒时使用，记录每分钟有多少总数</span></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">()</span>:</span></span><br><span class="line">    year = <span class="number">2019</span></span><br><span class="line">    month_num = &#123;<span class="number">1</span>: <span class="number">10</span>, <span class="number">2</span>: <span class="number">150</span>, <span class="number">3</span>: <span class="number">200</span>, <span class="number">4</span>: <span class="number">250</span>, <span class="number">5</span>: <span class="number">300</span>, <span class="number">6</span>: <span class="number">400</span>,</span><br><span class="line">                 <span class="number">7</span>: <span class="number">50</span>, <span class="number">8</span>: <span class="number">750</span>, <span class="number">9</span>: <span class="number">90</span>, <span class="number">10</span>: <span class="number">120</span>, <span class="number">11</span>: <span class="number">150</span>, <span class="number">12</span>: <span class="number">180</span>&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'./create_time.sql'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> fout:</span><br><span class="line">        sql_template = <span class="string">"""insert into create_time(create_time) values ("""</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> month, num <span class="keyword">in</span> month_num.items():  <span class="comment"># 月份和每月需要产生多少create_time数据</span></span><br><span class="line">            print(<span class="string">f'processing<span class="subst">&#123;month&#125;</span> with <span class="subst">&#123;num&#125;</span>'</span>)  <span class="comment"># 在生成过程中（例如循环）多打印一些参数，监控和debug都会用得到</span></span><br><span class="line">            batch = []</span><br><span class="line">            create_times = get_datetime(year, month, num)</span><br><span class="line">            <span class="keyword">for</span> idx, i <span class="keyword">in</span> enumerate(create_times):</span><br><span class="line">                batch.append(i.strftime(<span class="string">"'%Y-%m-%d %H:%M:%S'"</span>))</span><br><span class="line">                <span class="keyword">if</span> idx % <span class="number">10000</span> == <span class="number">0</span>:  <span class="comment"># 每1万数据刷一次磁盘</span></span><br><span class="line">                    print(<span class="string">'processing'</span>, idx)</span><br><span class="line">                    fout.write(sql_template + <span class="string">'),('</span>.join(batch) + <span class="string">');\n'</span>)</span><br><span class="line">                    fout.flush()</span><br><span class="line">                    batch.clear()</span><br><span class="line">            <span class="keyword">if</span> batch:  <span class="comment"># 跳出循环后，如果不满1万，需要再刷一次磁盘</span></span><br><span class="line">                fout.write(sql_template + <span class="string">'),('</span>.join(batch) + <span class="string">');\n'</span>)</span><br><span class="line">                fout.flush()</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    run()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="10-3-将str-转成list"><a href="#10-3-将str-转成list" class="headerlink" title="10.3 将str 转成list:"></a>10.3 将str 转成list:</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法一：</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">deserialize_feature</span><span class="params">(f_data)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> type(f_data) == list:</span><br><span class="line">        <span class="keyword">return</span> f_data</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> json.loads(<span class="string">"["</span> + f_data[<span class="number">1</span>:<span class="number">-1</span>] + <span class="string">"]"</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 方法二：</span></span><br><span class="line">num_list = []</span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> df.feature_data:</span><br><span class="line">    num = [float(i) <span class="keyword">for</span> i <span class="keyword">in</span> j[<span class="number">1</span>:<span class="number">-1</span>].split(<span class="string">","</span>)][<span class="number">0</span>]</span><br><span class="line">    num_list.append(num)</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">将list/dataFrame中元素带上 ‘ ’</span><br><span class="line">lst = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">8</span>]</span><br><span class="line">list(map(<span class="keyword">lambda</span> x : str(x),lst))</span><br><span class="line">[str(i) <span class="keyword">for</span> i <span class="keyword">in</span> lst]   <span class="comment"># ['1', '3', '8']</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="10-4-获取页面图片"><a href="#10-4-获取页面图片" class="headerlink" title="10.4 获取页面图片"></a>10.4 获取页面图片</h3><h5 id="10-4-1-单线程获取图片"><a href="#10-4-1-单线程获取图片" class="headerlink" title="10.4.1 单线程获取图片"></a>10.4.1 单线程获取图片</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">dfrl = dfrl[[<span class="string">'face_id'</span>,<span class="string">'cjtid'</span>]]</span><br><span class="line">url_prefix = <span class="string">"http://127.0.0.1:30057/image_proxy/192.168.10.8:30761/storage/getPicture"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save_image</span><span class="params">(sess, img, fname)</span>:</span></span><br><span class="line">    r = sess.get(<span class="string">f"<span class="subst">&#123;url_prefix&#125;</span>/<span class="subst">&#123;img&#125;</span>"</span>, stream=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">if</span> r.status_code == <span class="number">200</span>:</span><br><span class="line">        <span class="keyword">with</span> open(fname, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">            r.raw.decode_content = <span class="literal">True</span></span><br><span class="line">            shutil.copyfileobj(r.raw, f)</span><br><span class="line">            </span><br><span class="line">image_dir = Path(<span class="string">"unlabelled_images"</span>)</span><br><span class="line">image_dir.mkdir(exist_ok=<span class="literal">True</span>)</span><br><span class="line">face_dir = image_dir.joinpath(<span class="string">"face"</span>)</span><br><span class="line">face_dir.mkdir(exist_ok=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> requests.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    <span class="keyword">for</span> index, row <span class="keyword">in</span> dfrl.iterrows():</span><br><span class="line">        save_image(sess, row[<span class="string">'cjtid'</span>], face_dir.joinpath(<span class="string">f"<span class="subst">&#123;row[<span class="string">'face_id'</span>]&#125;</span>.jpg"</span>))</span><br></pre></td></tr></table></figure>
+
+<h5 id="10-4-2-多线程获取图片"><a href="#10-4-2-多线程获取图片" class="headerlink" title="10.4.2 多线程获取图片"></a>10.4.2 多线程获取图片</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> shutil     <span class="comment"># 对文件复制和移动 </span></span><br><span class="line"><span class="keyword">from</span> pathlib <span class="keyword">import</span> Path</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> tqdm</span><br><span class="line"><span class="keyword">from</span> concurrent.futures <span class="keyword">import</span> ThreadPoolExecutor, wait</span><br><span class="line"></span><br><span class="line">os.system(<span class="string">'ssh -f -N -L localhost:30057:192.168.10.8:30057 hgy'</span>)</span><br><span class="line">url_prefix = <span class="string">"http://127.0.0.1:30057/image_proxy/192.168.10.8:30761/storage/getPicture"</span></span><br><span class="line"></span><br><span class="line">faces_df = pd.read_csv(<span class="string">'./onid.csv'</span>)</span><br><span class="line">faces_id = list(faces_df.face_id)</span><br><span class="line">target_images = list(faces_df.target_image_storage_path)</span><br><span class="line"></span><br><span class="line">image_dir = Path(<span class="string">"myDateset"</span>)</span><br><span class="line">image_dir.mkdir(exist_ok=<span class="literal">True</span>)</span><br><span class="line">face_dir = image_dir.joinpath(<span class="string">"face"</span>)</span><br><span class="line">face_dir.mkdir(exist_ok=<span class="literal">True</span>)</span><br><span class="line">sess = requests.Session() </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">download_image</span><span class="params">(pid, img_path)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_save_image</span><span class="params">(sess, img, fname)</span>:</span></span><br><span class="line">        r = sess.get(<span class="string">f"<span class="subst">&#123;url_prefix&#125;</span>/<span class="subst">&#123;img&#125;</span>"</span>, stream=<span class="literal">True</span>)</span><br><span class="line">        <span class="keyword">if</span> r.status_code == <span class="number">200</span>:</span><br><span class="line">            <span class="keyword">with</span> open(fname, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">                r.raw.decode_content = <span class="literal">True</span></span><br><span class="line">                shutil.copyfileobj(r.raw, f)</span><br><span class="line">    _save_image(sess, img_path , face_dir.joinpath(<span class="string">f"<span class="subst">&#123;pid&#125;</span>.jpg"</span>))</span><br><span class="line">    </span><br><span class="line">tasks = []</span><br><span class="line"><span class="keyword">with</span> ThreadPoolExecutor(<span class="number">10</span>) <span class="keyword">as</span> executor, tqdm(total=len(faces_id)) <span class="keyword">as</span> bar:</span><br><span class="line">    <span class="keyword">for</span> download_id, download_pic <span class="keyword">in</span> zip(faces_id, target_images):</span><br><span class="line">        task = executor.submit(download_image, download_id, download_pic)</span><br><span class="line">        task.add_done_callback(<span class="keyword">lambda</span> fut: bar.update(<span class="number">1</span>))</span><br><span class="line">        tasks.append(task)</span><br><span class="line">    wait(tasks)</span><br><span class="line">sess.close()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="10-5-预写sql-文件"><a href="#10-5-预写sql-文件" class="headerlink" title="10.5 预写sql 文件"></a>10.5 预写sql 文件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"><span class="keyword">import</span> typing</span><br><span class="line"><span class="keyword">from</span> pathlib <span class="keyword">import</span> Path</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">WORD = <span class="string">""" insert into prescription_id_reorder(`id`, name) values """</span> </span><br><span class="line">INTO_VALUES = <span class="string">"""(&#123;id&#125;,&#123;name&#125;)"""</span></span><br><span class="line"></span><br><span class="line">iterate_elements_page(out_list,write_pres_detail_sql,DEFAULT_PAGE_SIZE,mk = <span class="number">110</span>,ak = <span class="number">47</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> ceil</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">iterate_elements_page</span><span class="params">(list_data, action, page_size, **kwargs)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    分页迭代list</span></span><br><span class="line"><span class="string">    :param list_data:</span></span><br><span class="line"><span class="string">    :param action: 分页动作</span></span><br><span class="line"><span class="string">    :param page_size: 分页大小</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    page_start = <span class="number">0</span></span><br><span class="line">    total = len(list_data)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> total == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">if</span> page_size &gt;= total:</span><br><span class="line">        <span class="keyword">if</span> len(kwargs) != <span class="number">0</span>:</span><br><span class="line">            action(list_data, kwargs)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            action(list_data)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    stop = ceil(total / page_size)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(stop):</span><br><span class="line">        <span class="comment"># kwargs 非空</span></span><br><span class="line">        page_list = list_data[page_start * page_size: (page_start + <span class="number">1</span>) * page_size]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> len(kwargs) != <span class="number">0</span>:</span><br><span class="line">            action(page_list, kwargs)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            action(page_list)</span><br><span class="line">        page_start += <span class="number">1</span></span><br><span class="line">DEFAULT_PAGE_SIZE = <span class="number">10000</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write_pres_detail_sql</span><span class="params">(pres_detail_list: typing.List, arg_dict)</span>:</span></span><br><span class="line">    work_dir = Path(<span class="string">f"<span class="subst">&#123;os.getcwd()&#125;</span>"</span>)</span><br><span class="line">    data_dir = work_dir.joinpath(<span class="string">'output'</span>).joinpath(<span class="string">"prescription_id_reorder"</span>)</span><br><span class="line">    data_dir.mkdir(parents=<span class="literal">True</span>, exist_ok=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> pres_detail_list:</span><br><span class="line">        logging.warning(<span class="string">'empty list return'</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    pres_detail_insert_sql = WORD.replace(<span class="string">'\n'</span>, <span class="string">''</span>)</span><br><span class="line">    pres_detail_template_sql = INTO_VALUES.replace(<span class="string">'\n'</span>, <span class="string">''</span>).replace(<span class="string">' '</span>, <span class="string">''</span>)</span><br><span class="line">    filename = Path(data_dir, <span class="string">f"prescription_id_<span class="subst">&#123;arg_dict[<span class="string">'mk'</span>]&#125;</span>_<span class="subst">&#123;arg_dict[<span class="string">'ak'</span>]&#125;</span>.txt"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    sql_out = open(filename, <span class="string">'ab'</span>, buffering=<span class="number">33554432</span>)</span><br><span class="line"></span><br><span class="line">    sql_out.write(pres_detail_insert_sql.encode(<span class="string">'utf-8'</span>))</span><br><span class="line"></span><br><span class="line">    first = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> pres_detail <span class="keyword">in</span> pres_detail_list:</span><br><span class="line">        <span class="keyword">if</span> first:</span><br><span class="line">            first = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            sql_out.write(<span class="string">b','</span>)</span><br><span class="line">        sql_out.write(pres_detail_template_sql.format(**pres_detail).encode(<span class="string">'utf-8'</span>))</span><br><span class="line"></span><br><span class="line">    sql_out.write(<span class="string">b';\n'</span>)</span><br><span class="line">    sql_out.flush()</span><br><span class="line">    sql_out.close()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="10-6-将数据随机分配到不同的间段"><a href="#10-6-将数据随机分配到不同的间段" class="headerlink" title="10.6 将数据随机分配到不同的间段"></a>10.6 将数据随机分配到不同的间段</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">id_sequence</span><span class="params">(from_id)</span>:</span></span><br><span class="line">    i = from_id</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">yield</span> i</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reorder</span><span class="params">(online_max_id, gap, data)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    :param online_max_id: 线上表的最大ID</span></span><br><span class="line"><span class="string">    :param gap: 两个ID段的间隔</span></span><br><span class="line"><span class="string">    :param data: 待排序的数据</span></span><br><span class="line"><span class="string">            [(10020, datetime(2019,9,18,23,45,56)), (10031, datetime(2019,9,18,23,46,56))]</span></span><br><span class="line"><span class="string">    :return: 新ID</span></span><br><span class="line"><span class="string">            [(10020, datetime(2019,9,18,23,45,56), 100001), (10031, datetime(2019,9,18,23,46,56), 100002)]</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="comment"># 计算需要分多少个段</span></span><br><span class="line">    seg = [id_sequence(i * (online_max_id + gap)) <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, ceil(len(data) / online_max_id) + <span class="number">1</span>)]</span><br><span class="line">    <span class="keyword">return</span> [(*d, next(seg[randint(<span class="number">0</span>, len(seg) - <span class="number">1</span>)])) <span class="keyword">for</span> idx, d <span class="keyword">in</span> enumerate(sorted(data, key=<span class="keyword">lambda</span> x: x[<span class="number">1</span>]))]</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+	<div>
+		
+			
+		
+	</div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/weixin.png" alt="xuwei 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/zhifubao.jpg" alt="xuwei 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    xuwei  |  微信公众号【浙杭第三城业主家园】
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://xuwei_big_datax.gitee.io/2023/04/16/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" title="数据分析">https://xuwei_big_datax.gitee.io/2023/04/16/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+  <li class="post-copyright-license">
+    并保留本声明和上方二维码。感谢您的阅读和支持！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/04/16/%E5%9F%BA%E4%BA%8EECS%E6%90%AD%E5%BB%BA%E4%BA%91%E4%B8%8A%E5%8D%9A%E5%AE%A2/" rel="next" title="基于ECS搭建云上博客">
+                <i class="fa fa-chevron-left"></i> 基于ECS搭建云上博客
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2023/04/16/%E6%A0%87%E7%AD%BE/" rel="prev" title="标签">
+                标签 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+  	<!--网易云插件-->
+    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 
+		src="https://music.163.com/outchain/player?type=2&id=106368&auto=1&height=66">
+    </iframe>
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/header.jpg"
+                alt="xuwei" />
+            
+              <p class="site-author-name" itemprop="name">xuwei</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/18668495986" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/about_me/qq.html" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-qq"></i>QQ</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据分析"><span class="nav-number">1.</span> <span class="nav-text">数据分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一-操作数据库"><span class="nav-number">2.</span> <span class="nav-text">一. 操作数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-插入数据"><span class="nav-number">2.0.1.</span> <span class="nav-text">1.1 插入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-查询数据"><span class="nav-number">2.0.2.</span> <span class="nav-text">1.2 查询数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-python操作需要SSH连接的数据库"><span class="nav-number">2.0.3.</span> <span class="nav-text">1.3 python操作需要SSH连接的数据库</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二-常用分析包"><span class="nav-number">3.</span> <span class="nav-text">二. 常用分析包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-pandas"><span class="nav-number">3.0.1.</span> <span class="nav-text">2.1 pandas</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-1-构建dataframe"><span class="nav-number">3.0.1.0.1.</span> <span class="nav-text">2.1.1 构建dataframe</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-2-修改列名"><span class="nav-number">3.0.1.0.2.</span> <span class="nav-text">2.1.2 修改列名</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-numpy"><span class="nav-number">3.0.2.</span> <span class="nav-text">2.2 numpy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-matplotlib"><span class="nav-number">3.0.3.</span> <span class="nav-text">2.3 matplotlib</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#十-可复用的方法"><span class="nav-number">4.</span> <span class="nav-text">十. 可复用的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#10-1-将结果序列化到磁盘，提高开发速率"><span class="nav-number">4.0.1.</span> <span class="nav-text">10.1 将结果序列化到磁盘，提高开发速率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-2-按曲线分配订单并写入sql文件"><span class="nav-number">4.0.2.</span> <span class="nav-text">10.2 按曲线分配订单并写入sql文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-3-将str-转成list"><span class="nav-number">4.0.3.</span> <span class="nav-text">10.3 将str 转成list:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-4-获取页面图片"><span class="nav-number">4.0.4.</span> <span class="nav-text">10.4 获取页面图片</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#10-4-1-单线程获取图片"><span class="nav-number">4.0.4.0.1.</span> <span class="nav-text">10.4.1 单线程获取图片</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#10-4-2-多线程获取图片"><span class="nav-number">4.0.4.0.2.</span> <span class="nav-text">10.4.2 多线程获取图片</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-5-预写sql-文件"><span class="nav-number">4.0.5.</span> <span class="nav-text">10.5 预写sql 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-6-将数据随机分配到不同的间段"><span class="nav-number">4.0.6.</span> <span class="nav-text">10.6 将数据随机分配到不同的间段</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2023 </span> 
+  <span class="with-love">
+    <i class="fa fa-heart" style="color: #ff6b6b;"></i>
+  </span> xuwei
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">64.7k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<span>
+<script>
+  var seconds = 1000;
+  var minutes = seconds * 60;
+  var hours = minutes * 60;
+  var days = hours * 24;
+  var years = days * 365;
+  var birthDay = Date.UTC(2020,08,28,14,00,00); // 这里设置建站时间
+  setInterval(function() {
+    var today = new Date();
+    var todayYear = today.getFullYear();
+    var todayMonth = today.getMonth()+1;
+    var todayDate = today.getDate();
+    var todayHour = today.getHours();
+    var todayMinute = today.getMinutes();
+    var todaySecond = today.getSeconds();
+    var now = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+    var diff = now - birthDay;
+    var diffYears = Math.floor(diff/years);
+    var diffDays = Math.floor((diff/days)-diffYears*365);
+    var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+    var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+    var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+      document.getElementById('showDays').innerHTML=""+diffYears+"年⏰"+diffDays+"天"+diffHours+"小时"+diffMinutes+"分钟"+diffSeconds+"秒";
+  }, 1000);
+</script>
+</span>
+
+<p>
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_site_pv">
+                👣本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        </span>
+        <span class="post-meta-divider">|</span>
+        <span id="busuanzi_container_site_uv" style='display:none'>
+                🐱‍🏍本站访客数<span id="busuanzi_value_site_uv"></span>人
+        </span>
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</p>
+<span>本站已运行<span id="showDays"></span></span>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'CSsDTbljS7fWnN15B1gvFPpI-gzGzoHsz',
+        appKey: '1J7jImso7Vp31VViLxdatQoW',
+        placeholder: '请先输入昵称，然后在此输入您的留言',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "./public/search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/clicklove.js"></script>
+  
+  <!-- 动态背景 -->
+  <div class="bg_content">
+  <canvas id="canvas"></canvas>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="/js/src/dynamic_bg.js"></script>
+<!-- 加载小人 -->
+<script src="/live2d-widget-master/autoload.js"></script>
